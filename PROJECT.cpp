@@ -591,3 +591,13 @@ void generateCrossword(char grid[GRID_SIZE][GRID_SIZE],string *words,string *hin
         }
     }
 }
+void EmptyGrid(char GRID[GRID_SIZE][GRID_SIZE],int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			GRID[i][j]=' ';
+		}
+	}
+}
