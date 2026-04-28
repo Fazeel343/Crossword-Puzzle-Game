@@ -367,3 +367,18 @@ void CopyGrid(char grid[GRID_SIZE][GRID_SIZE],char grid2[GRID_SIZE][GRID_SIZE])
         }
     }
 }
+bool CompareGrids(char grid[GRID_SIZE][GRID_SIZE],char grid2[GRID_SIZE][GRID_SIZE])
+{
+	bool flag=true;
+	for (int i=0; i<GRID_SIZE;++i) 
+	{
+        for (int j=0;j< GRID_SIZE;++j) 
+		{
+            if(grid[i][j]!=grid2[i][j])
+            {
+            	flag=false;
+			}
+        }
+    }
+	return flag;
+}
