@@ -471,3 +471,22 @@ void updateDisplayGrid(char grid[GRID_SIZE][GRID_SIZE],char grid2[GRID_SIZE][GRI
         }
     }
 }
+
+bool LinearSearch(string* arr, int n, string key)
+{
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]==key)
+            return true;
+    }
+    return false; 
+}
+void EmptyHints(string *hints2,int n,int *index)
+{
+	for(int i=0;i<n;i++)
+	{
+		hints2[i]="";
+		index[i]=-1;
+	}
+	HintCounter=0;
+}
