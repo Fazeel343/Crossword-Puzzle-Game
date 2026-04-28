@@ -737,5 +737,81 @@ int main() {
 	
 	User u;
 	int count=0;
+	while(1)
+	{
+		EmptyHints(hints2,sizeof(hints2)/sizeof(hints2[0]),index);
+		EmptyGrid(grid,27);
+		EmptyGrid(grid2,27);
+		h.DeleteAndInsertUsed(h2);
+		h2.clearTable();
+		cout << "\n\nEnter User Name: ";
+		fflush(stdin);
+		getline(cin,ptr);
+		cout << "\n\n";
+		
+		generateCrossword(grid,words,hints,sizeof(words)/sizeof(words[0]),h,h2,hints2);
+		CopyGrid(grid,grid2);
+		auto start_time=high_resolution_clock::now();  			
+		
+		while(1){
+			printGrid(grid2);
+			HintsDisplayer(hints2,index);
+			if(CompareGrids(grid,grid2))
+			{
+				break;
+			}
+			
+			string str;
+			cout << "\nEnter Word To Fill Crossword: ";
+			cin >> str;
+			
+			if(h2.Search(str))
+			{
+				int ind=h2.SearchWithIndex(str);
+				if(ind!=-1)
+				{
+					index[ind]=ind;
+				}
+			    updateDisplayGrid(grid,grid2,str);
+			}
+			else{
+				cout << "\nIncorrect\n\n";
+			}
+			 
+		}
+		auto end_time=high_resolution_clock::now(); 		
+		auto duration_user=duration_cast<seconds>(end_time - start_time).count();  
+		
+		u.insert_min_user(duration_user,ptr);
+		int temp=u.size_u;
+		for(int i=temp/2;i>0;i--){
+			u.heapify_min(i,temp);   
+		}	
+		u.user_min_sort(u.size_u);
+		
+		cout << "\nEnter 1 to play another game \nEnter 2 to exit\n";
+		cin >> choice;
+		cout << endl;
+		while(1){
+			if(choice==1)
+			{
+				u.print_score();
+				break;
+			}
+			else if(choice==2){
+				u.print_score();
+				exit(1);
+			}
+			else{
+				cout << "\n\t** Invalid Input **\n\nEnter Again: ";
+				cin >> choice;
+				cout << endl;
+			}
+		}
+		
+	
+	}
+	u.print_score();
+	
 	return 0;
 }
