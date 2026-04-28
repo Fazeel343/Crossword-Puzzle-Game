@@ -137,3 +137,198 @@ class Node{
 			index=-1;
 		}
 };
+class HashMap{
+	private:
+		Node **htable;
+		int size;
+	public:
+		HashMap(int size)
+		{
+			this->size=size;
+			htable=new Node*[size];
+			for (int i=0;i<size;i++)
+				htable[i] = NULL;
+		}
+		int generateKey(string str)
+		{
+			int key=0;
+			int p=0;
+			for(int i=0;i<str.length();i++,p++)
+			{
+				char c=str[i]-96;
+				key=key+pow(c,p);
+			}
+			return key;
+		}
+		int HashFunc(string str)
+		{
+			char c=str[0]-97;
+			return c%26;
+		}
+		void Insert(string word,string hint)
+		{
+			int key=generateKey(word);
+			Node *newNode=new Node(key,word,hint);
+			int i=HashFunc(word);
+			if(htable[i]==NULL)
+			{
+				htable[i]=newNode;
+			}
+			else
+			{
+				Node *ptr=htable[i];
+				while(ptr->next!=NULL)
+				{
+					ptr=ptr->next;
+				}
+				ptr->next=newNode;
+			}
+		}
+		void Insert(string word,string hint,int ind)
+		{
+			int key=generateKey(word);
+			Node *newNode=new Node(key,word,hint,ind);
+			int i=HashFunc(word);
+			if(htable[i]==NULL)
+			{
+				htable[i]=newNode;
+			}
+			else
+			{
+				Node *ptr=htable[i];
+				while(ptr->next!=NULL)
+				{
+					ptr=ptr->next;
+				}
+				ptr->next=newNode;
+			}
+		}
+		int SearchWithIndex(string str)
+		{
+			int i=HashFunc(str);
+			int k=generateKey(str);
+			Node *ptr=htable[i];
+			int val=-1;
+			while(ptr!=NULL)
+			{
+				if(k==ptr->key)
+				{
+					val=ptr->index;
+				}
+				ptr=ptr->next;
+			}
+			ptr=NULL;
+			return val;
+			
+		}
+		bool Search(string str)
+		{
+			int i=HashFunc(str);
+			int k=generateKey(str);
+			Node *ptr=htable[i];
+			while(ptr!=NULL)
+			{
+				if(k==ptr->key)
+				{
+					return true;
+				}
+				ptr=ptr->next;
+			}
+			ptr=NULL;
+			return false;
+		}
+		Node* getNewWord(char c)
+		{
+			int i=c-97;
+			Node *ptr=htable[i];
+			string val="";
+			int count=0;
+			while(ptr!=NULL)
+			{
+				count++;
+				ptr=ptr->next;
+			}
+			ptr=htable[i];
+			rep:
+			int random=rand()%count;
+			for(int i=0;i<random;i++)
+			{
+				ptr=ptr->next;
+			}
+			if(ptr->used==true)
+			{
+				goto rep;
+			}
+			Node *temp=ptr;
+			ptr->used=true;
+			return temp;
+		}
+	void clearTable()
+    {
+        for(int i=0;i<size;++i)
+        {
+            Node *current=htable[i];
+            while(current!=NULL)
+            {
+                Node* next=current->next;
+                delete current;
+                current=next;
+            }
+            htable[i]=NULL;
+        }
+    }
+    void DeleteAndInsertUsed(HashMap &h)
+    {
+    	for(int i=0;i<size;i++)
+    	{
+    		Node *ptr=h.htable[i];
+    		while(ptr!=NULL)
+			{
+				if(ptr->Word!="")
+				{
+					Delete(ptr->Word);
+					Insert(ptr->Word,ptr->Hint);	
+				}
+				
+				ptr=ptr->next;
+			}
+			ptr=NULL;	
+		}
+		
+	}
+		void Delete(string str)
+		{
+		    
+			if(Search(str))
+			{
+				int i=HashFunc(str);
+				int k=generateKey(str);
+				Node *ptr=htable[i];
+				if(ptr->key==k)
+				{
+					Node *temp=ptr;
+					ptr=ptr->next;
+					delete temp;
+					htable[i]=ptr;
+				}
+				else
+				{
+					Node *ptr=htable[i];
+					Node *prev=htable[i];
+					while(ptr->key!=k)
+					{
+						prev=ptr;
+						ptr=ptr->next;	
+					}	
+					prev->next=ptr->next;
+					Node *temp=ptr;
+					delete temp;
+				}
+			}
+			else
+			{
+				cout<<"Key Not Found!\n";
+			}
+			
+		}		
+};
