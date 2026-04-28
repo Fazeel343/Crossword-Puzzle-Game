@@ -354,3 +354,16 @@ void printGrid(char grid[GRID_SIZE][GRID_SIZE])
     }
     cout << endl;
 }
+void CopyGrid(char grid[GRID_SIZE][GRID_SIZE],char grid2[GRID_SIZE][GRID_SIZE])
+{
+	for (int i=0;i<GRID_SIZE;++i) 
+	{
+        for (int j=0;j<GRID_SIZE;++j) 
+		{
+            if(grid[i][j]>='A' && grid[i][j]<='Z' || grid[i][j]>='a' && grid[i][j]<='z')
+            {
+            	grid2[i][j]='-';
+			}
+        }
+    }
+}
