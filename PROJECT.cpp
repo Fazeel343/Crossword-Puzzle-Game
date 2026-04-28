@@ -440,3 +440,15 @@ bool VerticalUpdate(char grid[][GRID_SIZE],string str,char grid2[][GRID_SIZE],in
 	}
     return false;
 }
+bool HorizontalVerticalUpdate(char grid[][GRID_SIZE],string str,char grid2[][GRID_SIZE],int row, int col,int index) 
+{
+    if(HorizontalUpdate(grid,str,grid2,row,col,index)) 
+	{
+        return true;
+    }
+    if(VerticalUpdate(grid,str,grid2,row,col,index)) 
+	{
+        return true;
+    }
+    return false;
+}
