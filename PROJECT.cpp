@@ -601,3 +601,97 @@ void EmptyGrid(char GRID[GRID_SIZE][GRID_SIZE],int n)
 		}
 	}
 }
+int main() {
+	const int DATASET_SIZE = 500;
+    string dummyWords[DATASET_SIZE];
+    string dummyHints[DATASET_SIZE];
+    
+    for(int i=0;i<DATASET_SIZE;i++)
+    {
+        dummyWords[i] = "dummyword" + to_string(i);
+        dummyHints[i] = "dummy hint for word " + to_string(i);
+    }
+    
+    HashMap dummyHash(26);
+    for(int i=0;i<DATASET_SIZE;i++)
+    {
+        dummyHash.Insert(dummyWords[i], dummyHints[i]);
+    }
+
+	HashMap h(26);
+    HashMap h2(26);
+    string hints2[numWords]={""};
+    int index[numWords];
+    char grid[GRID_SIZE][GRID_SIZE];
+    char  grid2[GRID_SIZE][GRID_SIZE];
+    
+    for(int i=0; i<GRID_SIZE;++i) {
+        for (int j=0;j<GRID_SIZE;++j) {
+            grid[i][j]=' ';
+            grid2[i][j]=' ';
+        }
+    }
+	
+    string words[] = {
+        "abandon","ability","absence","academy","account","achieve","acquire","address","advance","advice",
+        "airport","ancient","analyze","approve","arrange","arrival","artificial","assistant","attempt","balance",
+        "battery","behavior","benefit","bicycle","boundary","building","campaign","capacity","capital","capture",
+        "category","celebrate","ceremony","challenge","chemical","citizen","civilization","climate","collapse","collect",
+        "combine","comfort","command","commerce","committee","community","company","compare","compete","complete",
+        "computer","concept","concern","confirm","connect","constant","construct","consume","contact","context",
+        "control","convert","convince","creative","culture","currency","decision","decline","defense","deliver",
+        "democracy","describe","design","develop","difference","digital","direction","discover","distance","district",
+        "document","domestic","economy","education","effective","efficient","electric","emergency","employee","engineer",
+        "environment","equipment","essential","estimate","evaluate","evidence","exchange","exercise","experience","experiment",
+        "facility","feature","feedback","festival","finance","foundation","freedom","function","generate","government",
+        "graduate","graphics","guarantee","guidance","hardware","heritage","history","hospital","identity","imagine",
+        "implement","improve","industry","influence","inform","initial","innovation","inquiry","insurance","integrate",
+        "intelligence","interest","internet","interview","investigate","investment","knowledge","language","learning","library",
+        "location","machine","management","marketing","material","medicine","memory","message","monitor","movement",
+        "network","nutrition","objective","operation","opportunity","organization","performance","philosophy","physical","platform",
+        "politics","population","position","potential","practice","predict","pressure","priority","procedure","process",
+        "product","profession","progress","property","protection","psychology","quality","reaction","research","resource"
+    };
+
+    
+    string hints[] = {
+        "To leave something behind","The skill to do something","The state of being away","A place of learning","A record of financial activity",
+        "To successfully reach a goal","To gain possession","A location or place","To move forward","Guidance or suggestion",
+        "A place for airplanes","Very old in history","To examine closely","To officially accept","To put in order",
+        "The act of reaching a place","Made by humans","Someone who helps","An effort to do something","A state of stability",
+        "A device that stores power","The way someone acts","An advantage","A two-wheeled vehicle","A dividing line",
+        "A structure with walls","An organized effort","The ability to hold","A city of government","To take control",
+        "A group or class","To honor an event","A formal occasion","A difficult task","Related to chemistry",
+        "A member of a country","An advanced society","Weather patterns","A sudden failure","To gather together",
+        "To mix or unite","A feeling of ease","To give orders","Trade activities","A decision-making group",
+        "A group of people","A business organization","To examine similarities","To compete with others","To finish fully",
+        "An electronic computing device","An idea or thought","A worry or interest","To verify something","To link together",
+        "Unchanging over time","To build something","To use resources","Communication with others","Surrounding circumstances",
+        "To manage power","To change form","To persuade","Original thinking","Shared traditions",
+        "A form of money","A choice made","To become smaller","Protection against attack","To transport something",
+        "Rule by the people","To explain in words","To plan","To grow or improve","A way things are not the same",
+        "Related to computers","A path or course","To find something new","The space between","A specific area",
+        "A written record","Related to home affairs","A system of money","The process of learning","Producing desired results",
+        "Working well","Powered by electricity","A serious situation","A worker","A technical professional",
+        "Natural surroundings","Tools or machinery","Very important","To calculate roughly","To judge something",
+        "Proof or facts","The act of trade","Physical activity","Knowledge gained","A scientific test",
+        "A building or service","A special part","Response to information","A celebration","Money management",
+        "The base of something","Liberty","A purpose","To create","A governing body",
+        "Someone who completed studies","Visual designs","A promise","Direction or advice","Computer components",
+        "Cultural inheritance","Past events","A medical facility","Who someone is","To form a picture in mind",
+        "To put into action","To make better","Business activity","Power to affect","To tell information",
+        "The first step","New ideas","A question or investigation","Protection coverage","To combine systems",
+        "Ability to think","Curiosity or concern","A global network","A formal conversation","To examine deeply",
+        "The act of putting money","Understanding gained","A system of words","The process of study","A place with books",
+        "A position","A mechanical device","The act of managing","Selling activities","Substance used",
+        "Medical treatment","The ability to remember","Information sent","To observe","Motion or change",
+        "Connected systems","Food science","A goal","The act of working","A chance",
+        "A structured group","How well something works","Study of thought","Relating to the body","A base for software",
+        "Government activity","People in an area","A role or job","Hidden ability","Repeated activity",
+        "To forecast","Force applied","Level of importance","A series of steps","A method",
+        "An item for sale","A career","Forward movement","Ownership","Safety",
+        "The study of the mind","Standard of excellence","Response to action","Systematic study","A supply source"
+	};
+
+	return 0;
+}
