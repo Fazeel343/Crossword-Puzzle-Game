@@ -511,3 +511,83 @@ void HintsDisplayer(string *hints2,int *index)
 	}
 	
 }
+void generateCrossword(char grid[GRID_SIZE][GRID_SIZE],string *words,string *hints,int n,HashMap h,HashMap h2,string *hints2)
+{
+	
+	srand(time(0));
+	
+	bool isHorizontal=false;
+	int randomIndex = rand() % n;
+    
+	string currentWord = words[randomIndex];
+	hints2[HintCounter]=hints[randomIndex];
+	
+	h2.Insert(currentWord,hints[randomIndex],HintCounter);
+    HintCounter++;
+	int startRow=0;
+    int startCol=0;
+    char randomChar=currentWord[(rand() % (currentWord.length()-1))+1];
+    int iIndex;
+    int jIndex;
+	for (int i=0;i<currentWord.length();++i) 
+	{
+        if(currentWord[i]==randomChar)
+        {
+            iIndex=0;
+            jIndex=startCol+i;
+        }
+        grid[startRow][startCol+i]=currentWord[i];
+    }
+    
+    for (int wordCount=1; wordCount<numWords;++wordCount) 
+	{
+		Node *temp=h.getNewWord(randomChar);
+		currentWord=temp->Word;
+		
+		hints2[HintCounter]=temp->Hint;
+    	h2.Insert(currentWord,temp->Hint,HintCounter);
+        
+		HintCounter++;
+        
+		startRow =iIndex;
+        startCol=jIndex;
+        randomChar=currentWord[(rand() % (currentWord.length()-1))+1];
+        for (int i=0; i < currentWord.length(); ++i) {
+            if(isHorizontal)
+            {
+                if(i==0)
+                {
+                    jIndex++;
+                    continue;
+                }
+                if(currentWord[i]==randomChar)
+                {
+                    jIndex=startCol + i;
+                }
+                grid[startRow][startCol+i]=currentWord[i];
+            }
+            else
+            {
+                if(i==0)
+                {
+                    iIndex++;
+                    continue;
+                }
+                if(currentWord[i]==randomChar)
+                {
+                    iIndex=startRow+i;
+                }
+                grid[startRow+i][startCol]=currentWord[i];
+            }
+            
+        }
+        if(isHorizontal)
+        {
+            isHorizontal=false;
+        }
+        else
+        {
+            isHorizontal=true;
+        }
+    }
+}
