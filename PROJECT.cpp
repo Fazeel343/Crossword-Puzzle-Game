@@ -332,3 +332,25 @@ class HashMap{
 			
 		}		
 };
+void printGrid(char grid[GRID_SIZE][GRID_SIZE]) 
+{
+    for (int i=0;i<GRID_SIZE;++i) 
+	{
+        for (int j=0;j<GRID_SIZE;++j) 
+		{
+            if(grid[i][j]>='A' && grid[i][j]<='Z' || grid[i][j]>='a' && grid[i][j]<='z')
+            {
+            	setColor(FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            	cout<<grid[i][j]<< " ";
+            	resetColor();
+            	
+			}
+			else{
+				cout<<grid[i][j]<< " ";	
+			}
+			
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
