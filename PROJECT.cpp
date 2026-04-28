@@ -452,3 +452,22 @@ bool HorizontalVerticalUpdate(char grid[][GRID_SIZE],string str,char grid2[][GRI
     }
     return false;
 }
+void updateDisplayGrid(char grid[GRID_SIZE][GRID_SIZE],char grid2[GRID_SIZE][GRID_SIZE],string str)
+{
+    bool found=false;
+    for (int i=0;i<GRID_SIZE;++i) 
+	{
+        for (int j=0;j<GRID_SIZE;++j) 
+		{
+            if(HorizontalVerticalUpdate(grid,str,grid2,i,j,0)) 
+			{
+                found=true;
+                break;
+            }
+        }
+        if(found) 
+		{
+            break;
+        }
+    }
+}
