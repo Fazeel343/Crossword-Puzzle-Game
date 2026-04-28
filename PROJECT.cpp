@@ -382,3 +382,61 @@ bool CompareGrids(char grid[GRID_SIZE][GRID_SIZE],char grid2[GRID_SIZE][GRID_SIZ
     }
 	return flag;
 }
+bool isValid(int row,int col) 
+{
+    return (row>=0 && row<GRID_SIZE && col>=0 && col<GRID_SIZE);
+}
+bool HorizontalUpdate(char grid[][GRID_SIZE],string str,char grid2[][GRID_SIZE],int row,int col,int index) 
+{
+    if(index==str.length()-2) 
+	{
+		if(grid2[row][col]==grid[row][col] && grid2[row][col+1]==grid[row][col+1])
+		{
+			return false;
+		}
+        grid2[row][col]=grid[row][col];
+        grid2[row][col+1]=grid[row][col+1];
+        resetColor();
+        return true;
+    }
+	if(isValid(row,col) && grid[row][col]==str[index]) 
+	{
+        char temp=grid2[row][col];
+        setColor(32);
+        grid2[row][col]=grid[row][col];
+        if(HorizontalUpdate(grid,str,grid2,row,col+1,index+1)) 
+		{
+            return true;
+        }
+        resetColor();
+		grid2[row][col]=temp;
+    }
+    return false;
+}
+bool VerticalUpdate(char grid[][GRID_SIZE],string str,char grid2[][GRID_SIZE],int row,int col,int index) 
+{
+    if (index==str.length()-2) 
+	{
+		if(grid2[row][col]==grid[row][col] && grid2[row+1][col]==grid[row+1][col])
+		{
+			return false;
+		}
+		grid2[row][col]=grid[row][col];
+		grid2[row+1][col]=grid[row+1][col];
+		resetColor();
+    	return true;
+	}
+    if(isValid(row,col) && grid[row][col]==str[index]) 
+	{
+		char temp=grid2[row][col];
+		setColor(32); 
+        grid2[row][col]=grid[row][col];
+        if(VerticalUpdate(grid,str,grid2,row+1,col,index+1)) 
+		{
+            return true;
+        }
+        resetColor();
+    	grid2[row][col]=temp;
+	}
+    return false;
+}
