@@ -490,3 +490,24 @@ void EmptyHints(string *hints2,int n,int *index)
 	}
 	HintCounter=0;
 }
+void HintsDisplayer(string *hints2,int *index)
+{
+	setColor(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+	cout<<"HINTS : \n";
+	resetColor();
+	for(int i=0;i<HintCounter;i++)
+	{
+		if(index[i]!=-1)
+		{
+			setColor(FOREGROUND_BLACK | FOREGROUND_INTENSITY);
+			cout<<i+1<<". "<<hints2[i]<<endl;	
+			resetColor();
+		}
+		else
+		{
+			cout<<i+1<<". "<<hints2[i]<<endl;
+		}
+		
+	}
+	
+}
