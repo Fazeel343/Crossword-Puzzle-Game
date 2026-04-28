@@ -693,5 +693,49 @@ int main() {
         "The study of the mind","Standard of excellence","Response to action","Systematic study","A supply source"
 	};
 
+	srand(time(0)); 
+    string target = dummyWords[DATASET_SIZE / 2]; 
+    
+    auto start = high_resolution_clock::now();
+    for(int i=0;i<DATASET_SIZE;i++) {
+    dummyHash.Search(dummyWords[i]);
+    }
+
+	auto end = high_resolution_clock::now();
+    auto hashTime = duration_cast<nanoseconds>(end - start).count();
+    
+    start = high_resolution_clock::now();
+    for(int i=0;i<DATASET_SIZE;i++) {
+    LinearSearch(dummyWords, DATASET_SIZE, dummyWords[i]);
+    } 
+
+	end = high_resolution_clock::now();
+    auto linearTime = duration_cast<nanoseconds>(end - start).count();
+    
+    setColor(14);
+    cout << "\n=========== PERFORMANCE COMPARISON ===========\n";
+    resetColor();
+    cout << left << setw(25) << "Algorithm" << setw(15) << "Time (ns)\n";
+    cout << "--------------------------------------------\n";
+    cout << setw(25) << "Hash Table Search" << setw(15) << hashTime << endl;
+    cout << setw(25) << "Linear Search" << setw(15) << linearTime << endl;
+    
+    cout << "\nConclusion: ";
+    if(hashTime < linearTime)
+        cout << "Hashing is more efficient due to O(1) average complexity.\n";
+    else
+        cout << "Linear search performed better for this dataset size.\n";
+
+    int n=sizeof(words)/sizeof(words[0]);
+    for(int i=0;i<n;i++)
+    {
+    	h.Insert(words[i],hints[i]);
+	}
+	srand(time(0));
+	string ptr;
+	int choice;
+	
+	User u;
+	int count=0;
 	return 0;
 }
